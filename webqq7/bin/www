@@ -1,0 +1,179 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var app = require('../app');
+var debug = require('debug')('WebQQ:server');
+var http = require('http');
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = normalizePort(process.env.PORT || '8000');
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+
+var server = http.createServer(app);
+
+
+var io=require("socket.io")(server);
+
+
+/**
+ * 从握手信息中获取cookie，为握手信息对象设置seesion和cookie属性
+ */
+function getSessionAndCookie(handshakeData,callback){
+	// 通过客户端的cookie字符串来获取其session数据
+	var Cookies = {};
+	if(handshakeData.headers.cookie){
+		//根据分号切割多条cookie信息然后处理
+		 handshakeData.headers.cookie.split(';').forEach(function( Cookie ) {
+			 //根据等号切割一条cookie的名称和值
+		        var parts = Cookie.split('=');
+		        /* 对上面定义的Cookie对象赋值，值要使用unescape()解码
+		         * 此处不一定是使用unescape，但大多数前端的cookie操作插件都将cookie值用escape()函数编码存储。
+		         * 具体见：http://www.cnblogs.com/duanhuajian/p/3499697.html
+		         */
+		        Cookies[parts[0].trim()] = unescape((parts[1] || '' ).trim());
+	   });
+	}
+	//将cookie加入到握手数据对象中，之后可以使用socket.shakehand获取到握手数据对象
+	handshakeData.cookie = Cookies;
+	
+	/* 获取session的标识名
+	*  nodejs保存的session令牌的格式类似
+	*  s:0ge4hXDuObTYgKy0YTXShGgGPeSyYU7u.tLO+WRWal2lUhC0IxPT8kZJgwMPJDk1j8iqPyxNkNr4
+	*  .号之前，s:之后的部分就是后台sessionStoreMemory存储对象中存储用户信息的属性名。可根据该属性名，获取到用户的session数据。
+	*/
+	if(handshakeData.cookie['appSession']){
+	    var connect_sid = handshakeData.cookie['appSession'].split('.')[0].split(':')[1]; 
+		if (connect_sid) {
+			//从sessionStoreMemory中获取用户session
+			global.storeMemory.get(connect_sid, function(error, session){
+				if (error) {
+					callback(error);
+				}
+				else {
+					//附加用户session到握手数据对象中
+					handshakeData.session = session||{};
+					callback(undefined);
+				}
+			});
+		}
+		else {
+			callback({message:'nosession'});
+		}
+	}else {
+		callback({message:'nosession'});
+	}
+}
+
+global.sessionSocket={};
+
+
+io.of("/connect").on("connection",function(socket){
+	getSessionAndCookie(socket.handshake,function(err){
+		if(err){
+			socket.emit("nologin",err);
+		}else if(socket.handshake.session.user){
+			global.sessionSocket[socket.handshake.session.user.id]=socket;
+			socket.on("clientSay",function(data){
+				var from=socket.handshake.session.user.id;
+				var to=data.to;
+				delete(data.to);
+				data.time=new Date()-0;
+		
+				if(global.sessionSocket[to]){
+					data.type=1;
+					data.friend=from;
+					global.sessionSocket[to].emit("say",data);
+				}
+				data.type=0;
+				data.friend=to;
+				socket.emit("say",data);
+			});
+			socket.on('disconnect',function(data){
+				console.log("一个连接关闭");
+				delete(global.sessionSocket[socket.handshake.session.user.id]);
+			})
+			socket.emit("showSocketId",{id:socket.handshake.session.user.id});
+		}else{
+			socket.emit("nologin",{message:"用户未登入"});
+		}
+	})
+})
+
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}

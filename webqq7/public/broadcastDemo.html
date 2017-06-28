@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="app">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="angular.js"></script>
+	</head>
+	<body ng-controller="parent">
+		<div ng-controller="c1">
+			{{name}}{{o2}}
+			<div ng-controller="c2">
+				{{name}}{{o1}}
+				<button ng-click="clickme()">click me</button>
+			</div>
+		</div>
+	</body>
+	<script>
+		var app=angular.module('app',[]);
+		app.controller('parent', ['$scope', function($scope){
+			$scope.$on('fromc2_clickme', function(event,data){
+				alert("parent");
+				$scope.$broadcast('fromparent_clickme',data);
+			});
+		}]);
+		
+		app.controller('c1', ['$scope', function($scope){
+			$scope.name="c1";
+			$scope.o1="c1";
+			$scope.$on('fromparent_clickme', function(event, data){
+				$scope.alertok(data.message);
+			});
+			$scope.alertok=function(str){
+				alert(str);
+			}
+		}]);
+		
+		app.controller('c2', ['$scope', function($scope){
+			$scope.name="c2";
+			$scope.o2="c2";
+			$scope.clickme=function(){
+				$scope.$emit('fromc2_clickme',{message: "12345"});
+			}
+		}]);
+	</script>
+</html>
+
+
+
+
+
+
+

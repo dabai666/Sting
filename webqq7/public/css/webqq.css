@@ -1,0 +1,815 @@
+body {
+  background-color: #f1f1f1 !important;
+  background-size: auto;
+  margin: auto;
+}
+@-webkit-keyframes shack {
+  0% {
+    top: 0;
+  }
+  25% {
+    top: 1px;
+  }
+  50% {
+    top: 0;
+  }
+  75% {
+    top: -2px;
+  }
+  100% {
+    top: 0;
+  }
+}
+@-webkit-keyframes flash {
+  0% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-moz-keyframes flash {
+  0% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.flash {
+  display: inline-block !important;
+  -webkit-animation: flash 0.6s infinite;
+  -moz-animation: flash 0.6s infinite;
+}
+li{
+  list-style: none;
+}
+/*总框架,设置块的样式*/
+.main-panel {
+/*	margin: auto;*/
+  border: 1px solid #c8c8c8;
+  width: 800px;
+	height: 600px;
+  background-color: #fdfdfd;
+}
+.main-panel * {
+  margin: 0;
+  padding: 0;
+}
+/*end 总框架,设置块的样式*/
+/*个人头像 信息选项*/
+.main-panel .main-panel-top {
+	width: 80px;
+	height: 600px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  padding: 10px;
+  float: left;
+  background-color: #31708F;
+}
+/*个人头像*/
+.main-panel .main-panel-top .my-head {
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  float: left;
+  overflow: hidden;
+}
+.main-panel .main-panel-top .my-head img {
+  width: 55px;
+  height: 55px;
+  position: relative;
+  vertical-align: middle;
+}
+.main-panel .main-panel-top .my-head:hover {
+  border-radius: 50%;
+  -webkit-animation: shack 500ms ease-in-out;
+}
+.main-panel .main-panel-top .my-head:hover:after {
+  content: '修改资料';
+  text-align: center;
+  color: #fff;
+  line-height: 60px;
+  font-size: 12px;
+  position: absolute;
+  width: 56px;
+  height: 56px;
+  top: 11px;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 100;
+}
+.main-panel .main-panel-top .my-head:active {
+  top: 1px;
+}
+/*end 个人头像*/
+
+/*个人信息,昵称,个性签名*/
+.main-panel .main-panel-top .my-head-info {
+  padding-left: 10px;
+  float: left;
+  display: none;
+}
+.main-panel .main-panel-top .my-head-info .nickname {
+  line-height: 30px;
+  font-weight: bold;
+}
+.main-panel .main-panel-top .my-head-info .sign {
+  line-height: 30px;
+  font-size: 13px;
+  color: #aaa;
+  position: absolute;
+  word-break: keep-all;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  left: 88px;
+  right: 10px;
+}
+/*end 个人信息,昵称,个性签名*/
+/*end 个人头像 信息选项*/
+
+/*背景图片*/
+.main-panel .backgrd_img{
+	width: 800px;
+	height: 600px;
+	background:url(../imgs/t010fab5b9c2437b404.jpg)no-repeat;
+}
+/*end 背景图片*/
+/*背景颜色*/
+.main-panel .backgrd_color{
+	width: 800px;
+	height: 600px;
+	background: rgba(255,255,255,0.8);
+}
+/*end 背景颜色*/
+/*第二块,添加好友面板与好友列表*/
+.main-panel .main-panel-body{
+	float: left;
+	width: 240px;
+	height: 600px;
+	border-right: 2px solid #CCCCCC;
+}
+.main-panel-body .main-tabs .main-panel-footer {
+  position: relative;
+  top:-60px;
+  width: 240px;
+  height: 40px;
+  padding: 5px;
+  /*border-bottom: 1px solid #8C8C8C;*/
+}
+.main-panel .main-tabs .main-panel-footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+  padding: 5px;
+  /*border-top: 1px solid #e1e1e1;*/
+}
+.main-panel-body .main-tabs .main-panel-footer .btn-new{
+	margin-left: 30px;
+	width: 150px;
+	height: 30px;
+	padding-left: 120px;
+  color: #8C8C8C;
+	background: whitesmoke;
+}
+.main-panel-body .main-tabs .main-panel-footer .btn-sm{
+/*	margin-left: 30px;*/
+	width: 30px;
+	height: 30px;
+/*	padding-left: 120px;*/
+  color: #8C8C8C;
+	background: whitesmoke;
+}
+.main-panel-body .main-tabs .main-panel-footer i{
+	padding-right: 10px;
+	height: 40px;
+	border-left: 2px solid #8C8C8C;
+}
+.main-panel .main-panel-body .main-tabs {
+  position: relative;
+  top: 70px;
+  left: 0;
+  width: 240px;
+	height: 520px;
+  bottom: 40px;
+  /*background: red;*/
+}
+/*好友列表 会话框*/
+.main-panel .main-panel-top .main-xuanxiang .main-tabs-heads {
+  overflow: hidden;
+  list-style: none;
+}
+.main-panel .main-panel-top .main-xuanxiang .main-tabs-heads{
+  width: 50px;
+  height: 140px;
+  margin-top: 30px;
+}
+
+.main-panel .main-panel-top .main-xuanxiang .main-tabs-heads img{
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
+  margin-top: 40px;
+  position: relative;
+  vertical-align: middle;
+}
+.main-panel .main-panel-top .main-xuanxiang .main-tabs-heads img:hover{
+ 	width: 40px;
+	height: 40px;
+	margin: 30px 0 0 5px;
+}
+/*end 好友列表 会话框*/
+
+.main-panel .main-panel-body .main-tabs .main-tabs-panels > li {
+  padding: 5px;
+  display: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  overflow-y: auto;
+}
+.main-panel .main-panel-body .main-tabs .main-tabs-panels > li.active {
+  display: block;
+}
+.main-panel .main-panel-body .main-tabs .main-tabs-panels > li .user-group-list .user-group-item {
+  position: relative;
+}
+.main-panel .main-panel-body .main-tabs .main-tabs-panels > li .user-group-list .user-group-item .user-list {
+  display: none;
+}
+.main-panel .main-panel-body .main-tabs .main-tabs-panels > li .user-group-list .user-group-item .user-list > li {
+  border-radius: 5px;
+  list-style: none;
+  word-break: keep-all;
+  white-space: nowrap;
+  width: 100%;
+  overflow: hidden;
+  padding: 5px;
+  position: relative;
+  height: 55px;
+}
+.main-panel .main-panel-body .main-tabs .main-tabs-panels > li .user-group-list .user-group-item .user-list > li:hover {
+  background: #f9f9f9;
+}
+.main-panel .main-panel-body .main-tabs .main-tabs-panels > li .user-group-list .user-group-item .user-list > li.select {
+  background: #f3f3f3;
+}
+.main-panel .main-panel-body .main-tabs .main-tabs-panels > li .user-group-list .user-group-item .user-list > li img {
+  width: 45px;
+  border-radius: 5px;
+  overflow: hidden;
+  vertical-align: middle;
+  position: absolute;
+}
+.main-panel .main-panel-body .main-tabs .main-tabs-panels > li .user-group-list .user-group-item .user-list > li p {
+  position: absolute;
+  right: 0;
+  left: 55PX;
+}
+.main-panel .main-panel-body .main-tabs .main-tabs-panels > li .user-group-list .user-group-item .user-list > li p span {
+  color: #bbb;
+  display: block;
+  word-break: keep-all;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
+  overflow: hidden;
+}
+.main-panel .main-panel-body .main-tabs .main-tabs-panels > li .user-group-list .user-group-item > span {
+  cursor: default;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  -moz-user-select: none;
+}
+.main-panel .main-panel-body .main-tabs .main-tabs-panels > li .user-group-list .user-group-item > span:hover > span {
+  color: #555;
+}
+.main-panel .main-panel-body .main-tabs .main-tabs-panels > li .user-group-list .user-group-item > span > span {
+  color: #ccc;
+}
+.main-panel .main-panel-body .main-tabs .main-tabs-panels > li .user-group-list .user-group-item span.glyphicon-triangle-bottom {
+  display: none;
+}
+.main-panel .main-panel-body .main-tabs .main-tabs-panels > li .user-group-list .user-group-item.active .user-list {
+  display: block;
+}
+.main-panel .main-panel-body .main-tabs .main-tabs-panels > li .user-group-list .user-group-item.active span.glyphicon-triangle-bottom {
+  display: inline-block;
+}
+.main-panel .main-panel-body .main-tabs .main-tabs-panels > li .user-group-list .user-group-item.active span.glyphicon-triangle-right {
+  display: none;
+}
+.main-panel .main-panel-body .main-tabs .main-tabs-panels > li .chatlist li {
+  border-radius: 5px;
+  list-style: none;
+  word-break: keep-all;
+  white-space: nowrap;
+  width: 100%;
+  overflow: hidden;
+  padding: 5px;
+  position: relative;
+  height: 55px;
+}
+.main-panel .main-panel-body .main-tabs .main-tabs-panels > li .chatlist li:hover {
+  background: #f9f9f9;
+}
+.main-panel .main-panel-body .main-tabs .main-tabs-panels > li .chatlist li.select {
+  background: #f3f3f3;
+}
+.main-panel .main-panel-body .main-tabs .main-tabs-panels > li .chatlist li img {
+  width: 45px;
+  border-radius: 5px;
+  overflow: hidden;
+  vertical-align: middle;
+  position: absolute;
+}
+.main-panel .main-panel-body .main-tabs .main-tabs-panels > li .chatlist li p {
+  position: absolute;
+  right: 0;
+  left: 55PX;
+}
+.main-panel .main-panel-body .main-tabs .main-tabs-panels > li .chatlist li p span {
+  color: #bbb;
+  display: block;
+  word-break: keep-all;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
+  overflow: hidden;
+}
+
+.form-control.ng-invalid {
+  outline: 0;
+  background: #fff5f5;
+}
+#modal-searchfriend .result {
+  margin-top: 10px;
+  max-height: 300px;
+  overflow: auto;
+}
+#modal-searchfriend .result .blcok-search-item {
+  overflow: hidden;
+  margin-top: 5px;
+  border: 1px solid #f1f1f1;
+  box-shadow: 0 0 1px #eee;
+  padding: 5px;
+  position: relative;
+  height: 68px;
+}
+#modal-searchfriend .result .blcok-search-item img {
+  float: left;
+  width: 50px;
+  height: 50px;
+}
+#modal-searchfriend .result .blcok-search-item p {
+  position: absolute;
+  left: 60px;
+  right: 5px;
+  overflow: hidden;
+}
+#modal-searchfriend .result .blcok-search-item p span,
+#modal-searchfriend .result .blcok-search-item p label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  white-space: nowrap;
+  word-break: keep-all;
+  display: inline-block;
+}
+#modal-searchfriend .result .blcok-search-item:hover {
+  box-shadow: 0 0 1px #9fc4e4;
+  border: 1px solid #abcbe8;
+}
+#modal-searchfriend .result .blcok-search-item.select {
+  box-shadow: 0 0 1px #337ab7;
+  border: 1px solid #337ab7;
+}
+#modal-editinfo .custom-form-group .headshot {
+  position: relative;
+  overflow: hidden;
+  width: 100px;
+  margin: 0 auto;
+}
+#modal-editinfo .custom-form-group .headshot #preview {
+  height: 100px;
+  width: 100px;
+  border: 1px solid #ccc;
+  position: relative;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+#modal-editinfo .custom-form-group .headshot #preview img {
+  max-height: 100%;
+  max-width: 100%;
+}
+#modal-editinfo .custom-form-group .headshot:hover::after {
+  content: '点击上传图片';
+  text-align: center;
+  color: #fff;
+  line-height: 100px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 100;
+}
+#modal-editinfo .custom-form-group .headshot input[type="file"] {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  height: 100px;
+  opacity: 0;
+  font-size: 100px;
+  z-index: 101;
+  cursor: pointer;
+}
+#modal-confirmfriend .blcok-friendinfo {
+  overflow: hidden;
+  margin-top: 5px;
+  border: 1px solid #f1f1f1;
+  box-shadow: 0 0 1px #eee;
+  padding: 5px;
+  position: relative;
+  height: 68px;
+}
+#modal-confirmfriend .blcok-friendinfo img {
+  float: left;
+  width: 55px;
+  height: 55px;
+}
+#modal-confirmfriend .blcok-friendinfo p {
+  position: absolute;
+  left: 65px;
+  right: 5px;
+  overflow: hidden;
+}
+#modal-confirmfriend .blcok-friendinfo p span,
+#modal-confirmfriend .blcok-friendinfo p label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  white-space: nowrap;
+  word-break: keep-all;
+  display: inline-block;
+}
+
+/*第三大块,聊天室,输入框*/
+.main-panel .disankuai{
+	float: left;
+	width: 480px;
+  height: 600px;
+  margin-left: 240px;
+  margin-top: -520px;
+}
+
+.main-panel .disankuai .chat-panel {
+	float: left;
+  top: 0px;
+  z-index: 10;
+  width: 480px;
+  height: 600px;
+}
+.main-panel .disankuai .chat-panel .left {
+  display: none;
+}
+.main-panel .disankuai .chat-panel.muit {
+  width: 480px;
+}
+.main-panel .disankuai .chat-panel.muit .right {
+  left: 150px;
+}
+/*.main-panel .disankuai .chat-panel.muit .right .single-chat .trow .title-box {
+  border-radius: 0 5px 0 0;
+}
+.main-panel .disankuai .chat-panel.muit .right .single-chat .trow .editor-box {
+  border-radius: 0 0 5px 0;
+}*/
+.main-panel .disankuai .chat-panel.muit .left {
+  display: block;
+  position: absolute;
+  overflow: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 150px;
+  border-right: 0;
+}
+.main-panel .disankuai .chat-panel.muit .left ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.main-panel .disankuai .chat-panel.muit .left ul li {
+  position: relative;
+  height: 48px;
+  padding: 5px;
+}
+.main-panel .disankuai .chat-panel.muit .left ul li.hasnew:after {
+  content: '';
+  position: absolute;
+  right: 2px;
+  top: 2px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: red;
+}
+.main-panel .disankuai .chat-panel.muit .left ul li label {
+  font-size: 12px;
+  font-family: "微软雅黑";
+  font-weight: normal;
+  text-overflow: ellipsis;
+  word-break: keep-all;
+  text-wrap: none;
+  display: inline-block;
+  right: 15px;
+  left: 50px;
+  line-height: 38px;
+  position: absolute;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.main-panel .disankuai .chat-panel.muit .left ul li img {
+  height: 38px;
+  width: 38px;
+  display: inline-block;
+}
+.main-panel .disankuai .chat-panel.muit .left ul li .close {
+  display: none;
+  margin-top: 8px;
+  background: #000;
+  width: 20px;
+  font-weight: normal;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 50%;
+  color: #fff;
+}
+.main-panel .disankuai .chat-panel.muit .left ul li .close:hover {
+  color: #fff;
+}
+.main-panel .disankuai .chat-panel.muit .left ul li:hover {
+  background: #e1e1e1;
+  color: #fff;
+  box-shadow: 0 0 5px #d4d4d4 inset;
+}
+.main-panel .disankuai .chat-panel.muit .left ul li:hover .close {
+  display: block;
+}
+.main-panel .disankuai .chat-panel.muit .left ul li:hover label {
+  right: 26px;
+}
+.main-panel .disankuai .chat-panel.muit .left ul li.active {
+  background: #d4d4d4;
+  color: #fff;
+  box-shadow: -1px -1px 5px #bbb inset;
+}
+.chat-panel .right {
+  right: 0;
+  height: 100%;
+  position: absolute;
+}
+.chat-panel .right .single-chat {
+  display: none;
+  table-layout: fixed;
+  width: 100%;
+  height: 100%;
+}
+.chat-panel .right .single-chat.active {
+  display: table;
+}
+.chat-panel .right .single-chat .trow {
+  display: table-row;
+}
+.chat-panel .right .single-chat .title-box {
+  height: 10px;
+  overflow: hidden;
+  display: table-cell;
+  width: 100%;
+  cursor: move;
+  -webkit-user-select: none;
+  padding: 3px;
+  border-radius: 5px 5px 0 0;
+  background-image: -moz-linear-gradient(top, #ffffff, #e1e1e1);
+  background-image: -ms-linear-gradient(top, #ffffff, #e1e1e1);
+  background-image: -o-linear-gradient(top, #ffffff, #e1e1e1);
+  background-image: -webkit-linear-gradient(top, #ffffff, #e1e1e1);
+  background-image: linear-gradient(top, #ffffff, #e1e1e1);
+  border: 1px solid #bbbbbb;
+  border-bottom: 0;
+  background: rgba(255,255,255,0.1);
+}
+.chat-panel .right .single-chat .title-box div {
+  height: 50px;
+}
+.chat-panel .right .single-chat .title-box div img {
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  position: absolute;
+}
+.chat-panel .right .single-chat .title-box div p {
+  position: absolute;
+  left: 60px;
+  right: 20px;
+}
+.chat-panel .right .single-chat .title-box div p label {
+  font-weight: normal;
+  color: #6e6e6e;
+  font-size: 16px;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: keep-all;
+  white-space: nowrap;
+}
+.chat-panel .right .single-chat .title-box div p span {
+  color: #aaa;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: keep-all;
+  white-space: nowrap;
+}
+.chat-panel .right .single-chat .message-box {
+  border: 1px solid #bbbbbb;
+  border-bottom: 0;
+  display: table-cell;
+  background: #fff;
+  border-top: 1px solid #bbbbbb;
+  position: relative;
+  width: 100%;
+  overflow-y: auto;
+  background: rgba(255,255,255,0.1);
+}
+.chat-panel .right .single-chat .message-box .message-wrap {
+  text-align: center;
+  top: 0;
+  padding: 5px;
+  position: absolute;
+  width: 100%;
+  overflow-y: visible;
+}
+.chat-panel .right .single-chat .message-box .message-wrap i {
+  background: #aaa;
+  padding: 3px 6px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-style: normal;
+  text-align: center;
+}
+.chat-panel .right .single-chat .message-box .message-wrap .in,
+.chat-panel .right .single-chat .message-box .message-wrap .out {
+  position: relative;
+  overflow: hidden;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+.chat-panel .right .single-chat .message-box .message-wrap .in.last,
+.chat-panel .right .single-chat .message-box .message-wrap .out.last {
+  padding-bottom: 20px;
+}
+.chat-panel .right .single-chat .message-box .message-wrap .in.last::after,
+.chat-panel .right .single-chat .message-box .message-wrap .out.last::after {
+  content: '以上是历史记录';
+  font-size: 12px;
+  text-align: center;
+  background: white;
+  width: 100px;
+  line-height: 20px;
+  position: absolute;
+  bottom: 0PX;
+  left: 50%;
+  color: #999;
+  margin-left: -50px;
+  display: block;
+}
+.chat-panel .right .single-chat .message-box .message-wrap .in.last::before,
+.chat-panel .right .single-chat .message-box .message-wrap .out.last::before {
+  content: '';
+  /*border-bottom: 1px solid #E1E1E1;*/
+  width: 100%;
+  position: absolute;
+  bottom: 10PX;
+  display: block;
+}
+.chat-panel .right .single-chat .message-box .message-wrap .f-headshot,
+.chat-panel .right .single-chat .message-box .message-wrap .m-headshot {
+  border: 1px solid #ccc;
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  vertical-align: middle;
+  float: left;
+}
+.chat-panel .right .single-chat .message-box .message-wrap .chat-pop {
+  float: left;
+  text-align: left;
+  max-width: 80%;
+  white-space: pre;
+  word-wrap: normal;
+  padding: 6px 8px;
+  word-break: break-all;
+  margin-top: 1px;
+  background: #337bb8;
+  border: 1px solid #286090;
+  border-radius: 5px;
+  position: relative;
+  color: #fff;
+  margin-left: 8px;
+}
+.chat-panel .right .single-chat .message-box .message-wrap .in .chat-pop::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-right: 9px solid #337bb8;
+  border-top: 2px solid transparent;
+  border-bottom: 8px solid transparent;
+  left: -8px;
+  top: 6px;
+}
+.chat-panel .right .single-chat .message-box .message-wrap .in .chat-pop::before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-right: 9px solid #286090;
+  border-top: 2px solid transparent;
+  border-bottom: 8px solid transparent;
+  left: -9px;
+  top: 6px;
+}
+.chat-panel .right .single-chat .message-box .message-wrap .out .m-headshot {
+  float: right;
+}
+.chat-panel .right .single-chat .message-box .message-wrap .out .chat-pop {
+  float: right;
+  margin-left: 0;
+  margin-right: 8px;
+  background: #f1f1f1;
+  color: #111;
+  border: 1px solid #ccc;
+}
+.chat-panel .right .single-chat .message-box .message-wrap .out .chat-pop::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 9px solid #f1f1f1;
+  border-top: 2px solid transparent;
+  border-bottom: 8px solid transparent;
+  right: -8px;
+  top: 6px;
+}
+.chat-panel .right .single-chat .message-box .message-wrap .out .chat-pop::before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 9px solid #ccc;
+  border-top: 2px solid transparent;
+  border-bottom: 8px solid transparent;
+  right: -9px;
+  top: 6px;
+}
+.chat-panel .right .single-chat .editor-box {
+  display: table-cell;
+  box-shadow: 2px 1px 15px #ccc;
+  border-radius: 0 0 5px 5px;
+  padding: 5px;
+  height: 30px;
+  background: #ffffff;
+  border: 1px solid #bbbbbb;
+  width: 100%;
+  background: rgba(255,255,255,0);
+}
+.chat-panel .right .single-chat .editor-box table {
+  width: 100%;
+  table-layout: fixed;
+  text-align: center;
+}
+.chat-panel .right .single-chat .editor-box table .textarea-message {
+  resize: none;
+  max-height: 60px;
+  min-height: 30px;
+}
+/*# sourceMappingURL=webqq.css.map */

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>angular demo</title>
+		<script src="angular.js"></script>
+	</head>
+	<body ng-app="app" ng-controller="userlistCtrl">
+		<ul ng-clock>
+			<li ng-repeat="group in groups">
+				<span>{{group.name}}</span>
+				<ul>
+					<li ng-repeat="friend in friends | filter:{groupid:group.id}:true">{{friend.nickname}}</li>
+				</ul>
+			</li>
+		</ul>		
+	</body>
+	<script>
+		var app=angular.module('app',[]);
+		app.controller("userlistCtrl",["$scope",function($scope){
+			setTimeout(function(){
+				$scope.groups=[{id:22, name:"我的好友"}, {id:2, name:"我的同事"}];
+				setTimeout(function(){
+					$scope.friends=[
+						{id:1,groupid:22,nickname:"瓜皮",signature:"我是某某"},
+						{id:2,groupid:22,nickname:"小叶子",signature:"我是某某"},
+						{id:3,groupid:22,nickname:"刘小刀",signature:"我是某某"},
+						{id:4,groupid:22,nickname:"大白",signature:"我是某某"},
+						{id:5,groupid:2,nickname:"志玲姐姐",signature:"我是某某"},
+						{id:6,groupid:2,nickname:"老李头",signature:"我是某某"},
+						{id:7,groupid:2,nickname:"周老板",signature:"我是某某"}
+					];
+					$scope.$apply();
+				});
+			}, 100);
+		}]);
+	</script>
+</html>
+
+
+
+
+
+
+

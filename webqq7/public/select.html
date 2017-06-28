@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	   <script type="text/javascript" src="js/angular.js" ></script>
+		<script>
+			angular.module("app",[]).controller('test',function($scope){
+				$scope.options=[{id:1,name:"fenzhu"},{id:2,name:"fenzhu2"}];
+				$scope.s=$scope.options[1]; 
+				console.log($scope.options[0]);
+				
+			});
+			
+		</script>
+	</head>
+	<body ng-app="app" ng-controller="test">
+		<select ng-model="s" ng-options="x.name for x in options"></select> 
+		
+	</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/jquery-1.11.1.min.js"></script>
+		<script src="js/socket.io.js"></script>
+		<script type="text/javascript">
+			var socket=io.connect('/');
+			
+			socket.on("showSocketId", function(data){
+				$("#socketid").text(data.id);
+			});
+			socket.on('say', function(data){
+				$('#chatPanel').append('<div><p>'+ data.from +'说：</p><p>'+data.message+'</p></div>')
+			});
+			
+			function send(){
+				socket.emit("clientSay", {to: $("#to").val(), message: $('textarea').val()});
+				$('#chatPanel').append('<div><p>我说：</p><p>'+$('textarea').val()+'</p></div>');
+			}
+		</script>
+	</head>
+	<body>
+		socketId: <span id="socketid"></span><br />
+		<div>to: <input id="to"/></div>
+		<div>
+			<textarea style="width:300px;height: 100px;"></textarea>
+			<button onclick="send()">发送</button>
+		</div>
+		<div id="chatPanel" style="border: 1px solid #ccc; height: 200px;"></div>
+	</body>
+</html>
